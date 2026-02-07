@@ -1,22 +1,21 @@
-import { IsString, IsNotEmpty, IsEmail, MinLength, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
+import { IsString, IsNotEmpty, IsEmail, IsNumber, Min } from "class-validator";
 
 export class CreateOnboardingDto {
   @IsString()
   @IsNotEmpty()
-  companyName: string;
+  nombre: string;
 
   @IsString()
   @IsNotEmpty()
-  contactName: string;
+  documento: string;
 
   @IsEmail()
-  contactEmail: string;
+  email: string;
 
-  @IsString()
-  @MinLength(7)
-  contactPhone: string;
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  montoInicial: number;
 
-  @IsOptional()
-  @IsString()
-  notes?: string;
 }
